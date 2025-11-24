@@ -1,0 +1,53 @@
+{
+	"name": "n8n-nodes-frontstack",
+	"version": "0.1.0",
+	"description": "",
+	"license": "MIT",
+	"homepage": "",
+	"keywords": [
+		"n8n-community-node-package"
+	],
+	"author": {
+		"name": "frontstack GmbH",
+		"email": "ping@frontstack.dev"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/frontstackcommerce/frontstack-n8n-node.git"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"credentials": [
+			"dist/credentials/FrontstackIngestApi.credentials.js"
+		],
+		"nodes": [
+			"dist/nodes/FrontstackIngest/FrontstackIngest.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "*",
+		"eslint": "9.32.0",
+		"n8n-workflow": "^1.118.1",
+		"prettier": "3.6.2",
+		"release-it": "^19.0.4",
+		"typescript": "5.9.2"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	},
+	"overrides": {
+		"change-case": "^4.1.2"
+	}
+}
