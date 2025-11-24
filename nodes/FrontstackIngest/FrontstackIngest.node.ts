@@ -1,4 +1,4 @@
-import { EngineResponse, IExecuteFunctions, IHttpRequestOptions, NodeConnectionTypes, NodeOutput } from 'n8n-workflow';
+import { IExecuteFunctions, IHttpRequestOptions, NodeConnectionTypes, NodeOutput } from 'n8n-workflow';
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
 
 export class FrontstackIngest implements INodeType {
@@ -29,21 +29,22 @@ export class FrontstackIngest implements INodeType {
         'Accept': 'application/json',
       }
     },
+    usableAsTool: true,
     properties: [
       {
         displayName: 'Upsert Endpoint',
         name: 'upsertEndpoint',
         type: 'string',
-        default: 'https://ingest-some-id.frontstack.dev/ingest/<some-id>/upsert',
-        placeholder: 'https://ingest-some-id.frontstack.dev/ingest/<some-id>/upsert',
+        default: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/upsert',
+        placeholder: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/upsert',
         description: 'Find this endpoint in your integration feed setup',
       },
       {
         displayName: 'Delete Endpoint',
         name: 'deleteEndpoint',
         type: 'string',
-        default: 'https://ingest-some-id.frontstack.dev/ingest/<some-id>/delete',
-        placeholder: 'https://ingest-some-id.frontstack.dev/ingest/<some-id>/delete',
+        default: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/delete',
+        placeholder: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/delete',
         description: 'Find this endpoint in your integration feed setup',
       },
       {
@@ -52,7 +53,7 @@ export class FrontstackIngest implements INodeType {
         type: 'options',
         noDataExpression: true,
         options: [{
-          name: 'Upsert',
+          name: 'Create or Update',
           value: 'upsert',
         }, {
           name: 'Delete',
@@ -63,12 +64,12 @@ export class FrontstackIngest implements INodeType {
     ],
   };
 
-  async execute(this: IExecuteFunctions, response?: EngineResponse): Promise<NodeOutput> {
+  async execute(this: IExecuteFunctions): Promise<NodeOutput> {
     const rawPayload = this.getInputData();
 
-    let ingestPayload = []
+    const ingestPayload = [];
 
-    let responseData: any = [];
+    let responseData = [];
 
     let endpoint: string;
     if (this.getNodeParameter('ingestOperation', 0, 'upsert') === 'upsert') {
@@ -88,7 +89,7 @@ export class FrontstackIngest implements INodeType {
       json: true,
     };
 
-    responseData = await this.helpers.requestWithAuthentication.call(this, 'frontstackIngestApi', options);
+    responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'frontstackIngestApi', options);
 
     return [this.helpers.returnJsonArray(responseData)];
   }

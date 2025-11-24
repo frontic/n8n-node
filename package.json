@@ -1,7 +1,7 @@
 {
 	"name": "n8n-nodes-frontstack",
 	"version": "0.1.0",
-	"description": "",
+	"description": "Frontstack n8n node for sending data to the Frontstack Ingest API",
 	"license": "MIT",
 	"homepage": "",
 	"keywords": [
