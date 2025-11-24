@@ -1,4 +1,4 @@
-import { IAuthenticateGeneric, Icon, ICredentialType, INodeProperties } from "n8n-workflow";
+import { IAuthenticateGeneric, Icon, ICredentialType, INodeProperties, ICredentialTestRequest } from "n8n-workflow";
 
 export class FrontstackIngestApi implements ICredentialType {
   name = 'frontstackIngestApi';
@@ -25,6 +25,25 @@ export class FrontstackIngestApi implements ICredentialType {
       typeOptions: {
         password: true,
       },
+      required: true,
+    },
+    {
+      displayName: 'Upsert Endpoint',
+      name: 'upsertEndpoint',
+      type: 'string',
+      default: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/upsert',
+      placeholder: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/upsert',
+      description: 'Find this endpoint in your integration feed setup',
+      required: true,
+    },
+    {
+      displayName: 'Delete Endpoint',
+      name: 'deleteEndpoint',
+      type: 'string',
+      default: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/delete',
+      placeholder: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/delete',
+      description: 'Find this endpoint in your integration feed setup',
+      required: true,
     }
   ];
 
@@ -36,4 +55,18 @@ export class FrontstackIngestApi implements ICredentialType {
       }
     }
   };
+  
+  test: ICredentialTestRequest = {
+    request: {
+      method: 'POST',
+      url: '={{$credentials.upsertEndpoint}}',
+      headers: {
+        'Authorization': '={{$credentials.apiKey}}',
+        'Content-Type': 'application/json',
+      },
+      body: {
+        data: [],
+      },
+    }
+  };  
 }

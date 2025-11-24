@@ -1,5 +1,4 @@
-import { IExecuteFunctions, IHttpRequestOptions, NodeConnectionTypes, NodeOutput } from 'n8n-workflow';
-import { INodeType, INodeTypeDescription } from 'n8n-workflow';
+import { IExecuteFunctions, IHttpRequestOptions, INodeType, INodeTypeDescription, NodeConnectionTypes, NodeOutput } from 'n8n-workflow';
 
 export class FrontstackIngest implements INodeType {
 
@@ -32,22 +31,6 @@ export class FrontstackIngest implements INodeType {
     usableAsTool: true,
     properties: [
       {
-        displayName: 'Upsert Endpoint',
-        name: 'upsertEndpoint',
-        type: 'string',
-        default: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/upsert',
-        placeholder: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/upsert',
-        description: 'Find this endpoint in your integration feed setup',
-      },
-      {
-        displayName: 'Delete Endpoint',
-        name: 'deleteEndpoint',
-        type: 'string',
-        default: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/delete',
-        placeholder: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/delete',
-        description: 'Find this endpoint in your integration feed setup',
-      },
-      {
         displayName: 'Ingest Operation',
         name: 'ingestOperation',
         type: 'options',
@@ -71,11 +54,13 @@ export class FrontstackIngest implements INodeType {
 
     let responseData = [];
 
+    const credentials = await this.getCredentials('frontstackIngestApi');
+    
     let endpoint: string;
     if (this.getNodeParameter('ingestOperation', 0, 'upsert') === 'upsert') {
-      endpoint = this.getNodeParameter('upsertEndpoint', 0, '') as string;
+      endpoint = credentials.upsertEndpoint as string;
     } else {
-      endpoint = this.getNodeParameter('deleteEndpoint', 0, '') as string;
+      endpoint = credentials.deleteEndpoint as string;
     }
 
     for (const item of rawPayload) {
