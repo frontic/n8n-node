@@ -1,6 +1,6 @@
 {
 	"name": "@frontic/n8n-nodes-ingest",
-	"version": "0.0.9",
+	"version": "0.1.0",
 	"description": "Frontic n8n node for sending data to the Frontic Ingest API",
 	"license": "MIT",
 	"homepage": "https://www.frontic.com",
