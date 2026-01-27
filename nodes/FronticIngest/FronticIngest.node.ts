@@ -1,24 +1,24 @@
 import { IExecuteFunctions, IHttpRequestOptions, INodeType, INodeTypeDescription, NodeConnectionTypes, NodeOutput } from 'n8n-workflow';
 
-export class FrontstackIngest implements INodeType {
+export class FronticIngest implements INodeType {
 
   description: INodeTypeDescription = {
-    displayName: 'Frontstack Ingest API',
-    name: 'frontstackIngest',
-    icon: 'file:frontstack.svg',
+    displayName: 'Frontic Ingest API',
+    name: 'fronticIngest',
+    icon: 'file:frontic.svg',
     group: ['input'],
     version: [1, 0, 0],
-    description: 'Send data to Frontstacks Ingest API',
+    description: 'Send data to Frontics Ingest API',
     defaults: {
-      name: 'Frontstack Ingest API',
+      name: 'Frontic Ingest API',
     },
     inputs: [NodeConnectionTypes.Main],
     outputs: [NodeConnectionTypes.Main],
-    documentationUrl: 'https://docs.frontstack.dev/reference/ingest-api',
+    documentationUrl: 'https://docs.frontic.com/reference/ingest-api',
     credentials: [
       {
-        displayName: 'Frontstack Ingest API Credentials',
-        name: 'frontstackIngestApi',
+        displayName: 'Frontic Ingest API Credentials',
+        name: 'fronticIngestApi',
         required: true,
       },
     ],
@@ -54,8 +54,8 @@ export class FrontstackIngest implements INodeType {
 
     let responseData = [];
 
-    const credentials = await this.getCredentials('frontstackIngestApi');
-    
+    const credentials = await this.getCredentials('fronticIngestApi');
+
     let endpoint: string;
     if (this.getNodeParameter('ingestOperation', 0, 'upsert') === 'upsert') {
       endpoint = credentials.upsertEndpoint as string;
@@ -74,7 +74,7 @@ export class FrontstackIngest implements INodeType {
       json: true,
     };
 
-    responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'frontstackIngestApi', options);
+    responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'fronticIngestApi', options);
 
     return [this.helpers.returnJsonArray(responseData)];
   }

@@ -1,17 +1,17 @@
 import { IAuthenticateGeneric, Icon, ICredentialType, INodeProperties, ICredentialTestRequest } from "n8n-workflow";
 
-export class FrontstackIngestApi implements ICredentialType {
-  name = 'frontstackIngestApi';
+export class FronticIngestApi implements ICredentialType {
+  name = 'fronticIngestApi';
 
-  displayName = 'Frontstack Ingest API';
+  displayName = 'Frontic Ingest API';
 
-  icon: Icon = 'file:frontstack.svg';
+  icon: Icon = 'file:frontic.svg';
 
-  documentationUrl = 'https://docs.frontstack.dev/reference/ingest-api';
-  
+  documentationUrl = 'https://docs.frontic.com/reference/ingest-api';
+
   properties: INodeProperties[] = [
     {
-      displayName: 'Create a new Ingest API key in your <a href="https://app.frontstack.dev/settings/secrets" target="_blank">Frontstack Settings</a>',
+      displayName: 'Create a new Ingest API key in your <a href="https://app.frontic.com/settings/secrets" target="_blank">Frontic Settings</a>',
       name: 'docsNotice',
       type: 'notice',
       default: '',
@@ -21,7 +21,7 @@ export class FrontstackIngestApi implements ICredentialType {
       name: 'apiKey',
       type: 'string',
       default: '',
-      description: 'Create a new API key in your Frontstack project settings',
+      description: 'Create a new API key in your Frontic project settings',
       typeOptions: {
         password: true,
       },
@@ -31,8 +31,8 @@ export class FrontstackIngestApi implements ICredentialType {
       displayName: 'Upsert Endpoint',
       name: 'upsertEndpoint',
       type: 'string',
-      default: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/upsert',
-      placeholder: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/upsert',
+      default: 'https://ingest-project-hash.frontic.com/ingest/feed-hash/upsert',
+      placeholder: 'https://ingest-project-hash.frontic.com/ingest/feed-hash/upsert',
       description: 'Find this endpoint in your integration feed setup',
       required: true,
     },
@@ -40,8 +40,8 @@ export class FrontstackIngestApi implements ICredentialType {
       displayName: 'Delete Endpoint',
       name: 'deleteEndpoint',
       type: 'string',
-      default: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/delete',
-      placeholder: 'https://ingest-project-hash.frontstack.dev/ingest/feed-hash/delete',
+      default: 'https://ingest-project-hash.frontic.com/ingest/feed-hash/delete',
+      placeholder: 'https://ingest-project-hash.frontic.com/ingest/feed-hash/delete',
       description: 'Find this endpoint in your integration feed setup',
       required: true,
     }
@@ -55,7 +55,7 @@ export class FrontstackIngestApi implements ICredentialType {
       }
     }
   };
-  
+
   test: ICredentialTestRequest = {
     request: {
       method: 'POST',
@@ -68,5 +68,5 @@ export class FrontstackIngestApi implements ICredentialType {
         data: [],
       },
     }
-  };  
+  };
 }

@@ -1,19 +1,19 @@
 {
-	"name": "n8n-nodes-frontstack",
-	"version": "0.1.0",
-	"description": "Frontstack n8n node for sending data to the Frontstack Ingest API",
+	"name": "@frontic/n8n-nodes-ingest",
+	"version": "0.0.9",
+	"description": "Frontic n8n node for sending data to the Frontic Ingest API",
 	"license": "MIT",
-	"homepage": "",
+	"homepage": "https://www.frontic.com",
 	"keywords": [
 		"n8n-community-node-package"
 	],
 	"author": {
-		"name": "frontstack GmbH",
-		"email": "ping@frontstack.dev"
+		"name": "frontstack GmbH DBA Frontic",
+		"email": "hi@frontic.com"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/frontstackcommerce/frontstack-n8n-node.git"
+		"url": "git+https://github.com/frontic/n8n-node.git"
 	},
 	"scripts": {
 		"build": "n8n-node build",
@@ -25,15 +25,17 @@
 		"prepublishOnly": "n8n-node prerelease"
 	},
 	"files": [
-		"dist"
+		"dist/",
+		"LICENSE.md",
+		"README.md"
 	],
 	"n8n": {
 		"n8nNodesApiVersion": 1,
 		"credentials": [
-			"dist/credentials/FrontstackIngestApi.credentials.js"
+			"dist/credentials/FronticIngestApi.credentials.js"
 		],
 		"nodes": [
-			"dist/nodes/FrontstackIngest/FrontstackIngest.node.js"
+			"dist/nodes/FronticIngest/FronticIngest.node.js"
 		]
 	},
 	"devDependencies": {
