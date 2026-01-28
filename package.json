@@ -13,7 +13,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/frontic/n8n-node.git"
+		"url": "git+https://github.com/frontic/n8n-nodes-ingest.git"
 	},
 	"scripts": {
 		"build": "n8n-node build",

@@ -11,7 +11,7 @@ Frontic is a data ingestion and synchronization platform that allows you to send
 [Credentials](#credentials)  
 [Compatibility](#compatibility)  
 [Usage](#usage)  
-[Resources](#resources)  
+[Resources](#resources)
 
 ## Installation
 
@@ -73,6 +73,7 @@ The Frontic Ingest Node processes data from previous nodes in your workflow:
 ### Example Workflow
 
 A typical use case might involve:
+
 1. Fetching data from a source (e.g., a database, API, or file)
 2. Transforming the data using n8n's data transformation nodes
 3. Using the Frontic Ingest Node to send the transformed data to Frontic
@@ -82,26 +83,29 @@ The node accepts any JSON data structure, making it flexible for various data fo
 
 ## Resources
 
-* [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
-* [Frontic Ingest API Documentation](https://docs.frontic.com/reference/ingest-api)
-* [Frontic Settings](https://app.frontic.com/settings/secrets)
+- [n8n community nodes documentation](https://docs.n8n.io/integrations/#community-nodes)
+- [Frontic Ingest API Documentation](https://docs.frontic.com/reference/ingest-api)
+- [Frontic Settings](https://app.frontic.com/settings/secrets)
 
 ### Test the node
 
 To test the node, follow these steps:
 
 1. Install n8n globally
+
    ```bash
    npm install n8n -g
    ```
 
 2. Publish the node locally (inside the n8n-nodes-frontic directory)
+
    ```bash
-   npm run build 
+   npm run build
    npm link
    ```
 
 3. Install the node in n8n (inside the n8n directory)
+
    ```bash
    cd ~/.n8n/custom
    npm link n8n-nodes-frontic
@@ -114,12 +118,12 @@ To test the node, follow these steps:
 
 **Troubleshooting:**
 
-If the directory `~/.n8n/custom` does not exist, start `n8n` once (this will create `~/.n8n`) and then run 
+If the directory `~/.n8n/custom` does not exist, start `n8n` once (this will create `~/.n8n`) and then run
 
 ```bash
 # Inside the ~/.n8n directory
-mkdir custom 
-cd custom 
+mkdir custom
+cd custom
 npm init
 ```
 
